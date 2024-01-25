@@ -20,7 +20,6 @@ from rest_framework import routers
 from dbserverapi import views
 
 router = routers.DefaultRouter()
-router.register(r'posts', views.PostViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
