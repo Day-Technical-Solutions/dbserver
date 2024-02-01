@@ -17,6 +17,11 @@ def post_list(request):
 @require_http_methods(["POST"])
 def post_create(request):
     data = JSONParser().parse(request)
+
+    # Check for existing 'url'
+    if 'url' in data and Post.objects.filter(url=data['url']).exists():
+        return JsonResponse({'error': 'Duplicate entry found'}, status=400) 
+
     serializer = PostSerializer(data=data)
     if serializer.is_valid():
         serializer.save()
